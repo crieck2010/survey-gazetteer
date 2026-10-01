@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "survey-gazetteer"
+version = "0.1.0"
+description = "Offline place-label engine for map reels: ranked city/town labels for any region bbox, in the exact format survey-aesthetics' place_labels consumes"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "crieck2010" }]
+keywords = ["gazetteer", "place-labels", "cartography", "natural-earth", "dataviz", "map-animation"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+# Stdlib only, on purpose: this engine must load anywhere survey-viz runs,
+# including minimal render workers with no network.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["build", "pytest"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["gazetteer*"]
+
+# The bundled Natural Earth dataset ships inside the installed package.
+[tool.setuptools.package-data]
+gazetteer = ["data/*.csv", "data/*.json"]
+
+[project.urls]
+Homepage = "https://github.com/crieck2010/survey-gazetteer"
+Repository = "https://github.com/crieck2010/survey-gazetteer"
